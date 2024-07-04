@@ -1,0 +1,48 @@
+﻿/* Styles for Login.aspx */
+
+/* Background Image and Container Styles */
+.login-bg {
+    height: 100vh;
+    background-image: url('../Images/login.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Card and Form Styling */
+.card {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-center {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Error and Success Message Styling */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+    label.error {
+        color: red;
+    }
+
+    label.success {
+        color: green;
+    }
