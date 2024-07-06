@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminDoctorManagement.aspx.cs" Inherits="HospitalSystem.AdminDoctorManagement" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminDoctorManagement.aspx.cs" Inherits="HospitalSystem.AdminDoctorManagement" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
         <div class="background">
             <div class="container mt-5">
-                <h1 class="mb-4 text-white">Doctor Management or <a href="AdminDoctorList.aspx">Doctor List</a></h1>
+                <h1 class="mb-4 text-white">Doctor Management</h1>
 
                 <!-- Form for adding/editing doctor -->
                 <div class="card">
@@ -34,29 +34,39 @@
                             <asp:TextBox ID="txtNIC" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="mb-3">
-                            <label for="txtCivilStatus" class="form-label">Civil Status</label>
-                            <asp:TextBox ID="txtCivilStatus" runat="server" CssClass="form-control"></asp:TextBox>
-                        </div>
+                           <label for="ddlCivilStatus" class="form-label"> Civil Status</label>
+                           <asp:DropDownList ID="ddlCivilStatus" runat="server" CssClass="form-select">
+                               <asp:ListItem Text="Choose an option" Value="" Selected="True" disabled></asp:ListItem>
+                               <asp:ListItem Text="Married" Value="Married"></asp:ListItem>
+                               <asp:ListItem Text="Widowed" Value="Widowed"></asp:ListItem>
+                               <asp:ListItem Text="Separated" Value="Separated"></asp:ListItem>
+                               <asp:ListItem Text="Divorced" Value="Divorced"></asp:ListItem>
+                               <asp:ListItem Text="Single" Value="Single"></asp:ListItem>
+                           </asp:DropDownList>
+                       </div>
                         <div class="mb-3">
                             <label for="txtBirthDate" class="form-label">Birth Date</label>
-                            <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="mb-3">
-                            <label for="txtPhone" class="form-label">Phone</label>
-                            <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                         </div>
                         <div class="mb-3">
                             <label for="txtEmail" class="form-label">Email</label>
                             <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="mb-3">
+                            <label for="txtPhone" class="form-label">Phone</label>
+                            <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="mb-3">
                             <label for="txtSpecialization" class="form-label">Specialization</label>
                             <asp:TextBox ID="txtSpecialization" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
+                           <div class="mb-3">
+                               <label for="txtAddress" class="form-label">Addres</label>
+                               <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" ></asp:TextBox>
+                           </div>
                         <div>
-                            <asp:Button ID="btnAddDoctor" runat="server" Text="Add Doctor" CssClass="btn btn-primary" OnClick="btnAddDoctor_Click" />
-                            <asp:Button ID="btnEditDoctor" runat="server" Text="Edit Doctor" CssClass="btn btn-success ms-2" OnClick="btnEditDoctor_Click" />
-                            <asp:Button ID="btnDeleteDoctor" runat="server" Text="Delete Doctor" CssClass="btn btn-danger ms-2" OnClick="btnDeleteDoctor_Click" />
+                            <asp:Button ID="btnAddDoctor" runat="server" Text="Add Doctor" CssClass="btn btn-primary" OnClick="btnAddDoctor_Click" OnClientClick="return confirm('Are you sure you want to add this doctor?');"/>
+                            <asp:Button ID="btnBack" runat="server" Text="Back" CssClass="btn btn-danger ms-2" OnClick="btnBack_Click" OnClientClick="return confirm('Are you sure you want to go back?');"/>
                         </div>
                     </div>
                 </div>
