@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,5 +27,6 @@ namespace HospitalSystem.Objects
     public class Doctor : AppUser
     {
         public string Specialty { get; set; } // Dentist, Surgeon, Cardiologist, etc.
+        public string Address { get; set; }
     }
 }
