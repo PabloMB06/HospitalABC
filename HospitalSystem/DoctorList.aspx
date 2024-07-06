@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DoctorList.aspx.cs" Inherits="HospitalSystem.DoctorList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DoctorList.aspx.cs" Inherits="HospitalSystem.DoctorList" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +26,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="container">
-            <h2 class="mb-4 text-center text-dark">Doctor List or <a href="AdminDoctorManagement.aspx">Doctor Management</a></h2>
+            <h2 class="mb-4 text-center text-dark">Doctor List</h2>
             <asp:Label ID="lblErrorMessage" runat="server" CssClass="text-danger"></asp:Label>
             <asp:Table ID="tblPatientList" runat="server" CssClass="table table-striped">
                 <asp:TableHeaderRow>
@@ -35,6 +35,7 @@
                     <asp:TableHeaderCell></asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
+            <asp:Button ID="btnBack" runat="server" Text="Go Back" CssClass="btn btn-danger ms-2" OnClick="btnBack_Click" />
         </div>
 
         <!-- Modal for delete confirmation -->
