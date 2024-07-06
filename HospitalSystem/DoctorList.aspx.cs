@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.UI.WebControls;
@@ -27,7 +27,7 @@ namespace HospitalSystem
                     foreach (string line in lines)
                     {
                         string[] doctorData = line.Split(';');
-                        if (doctorData.Length >= 9)
+                        if (doctorData.Length >= 8)
                         {
                             string doctorName = $"{doctorData[0]} {doctorData[1]} {doctorData[2]}";
                             TableRow row = new TableRow();
@@ -65,10 +65,6 @@ namespace HospitalSystem
                             row.Cells.Add(deleteAllCell);
 
                             tblPatientList.Rows.Add(row);
-                        }
-                        else
-                        {
-                            ShowErrorMessage($"Invalid doctor data: {line}");
                         }
                     }
                 }
@@ -112,6 +108,11 @@ namespace HospitalSystem
                 DeleteDoctor(doctorId);
                 LoadDoctorList();
             }
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminManageDoctorDashboard.aspx");
         }
 
         private void ShowErrorMessage(string message)
