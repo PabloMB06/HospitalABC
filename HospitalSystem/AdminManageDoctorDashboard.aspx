@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminManageDoctorDashboard.aspx.cs" Inherits="HospitalSystem.AdminManageDoctorDashboard" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminManageDoctorDashboard.aspx.cs" Inherits="HospitalSystem.AdminManageDoctorDashboard" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,7 +14,7 @@
                 <h1 class="mb-4 text-white">My Workspace</h1>
                 <div class="btn-group-vertical">
                     <asp:Button ID="btnGoAddDoctor" runat="server" Text="Add Doctor" CssClass="btn btn-primary mb-3 btn-lg" OnClick="btnGoAddDoctor_Click" />
-                    <asp:Button ID="btnDoctorList" runat="server" Text="Doctor List" CssClass="btn btn-primary mb-3 btn-lg" OnClick="btnDoctorList_Click" />
+                    <asp:Button ID="btnBack" runat="server" Text="Doctor List" CssClass="btn btn-primary mb-3 btn-lg" OnClick="btnBack_Click" />
                 </div>
             </div>
         </div>
