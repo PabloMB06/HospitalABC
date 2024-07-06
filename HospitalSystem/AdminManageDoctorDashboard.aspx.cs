@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,21 +7,31 @@ using System.Web.UI.WebControls;
 
 namespace HospitalSystem
 {
-    public partial class AdminManageDoctorDashboard : System.Web.UI.Page
+    public partial class AdminDashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void btnGoAddDoctor_Click(object sender, EventArgs e)
+        protected void btnAdminPatientManagement_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminDoctorManagement.aspx");
+            Response.Redirect("AdminManagePatientDashboard.aspx");
         }
 
-        protected void btnDoctorList_Click(object sender, EventArgs e)
+        protected void btnAdminDoctorManagement_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DoctorList.aspx");
+            Response.Redirect("AdminManageDoctorDashboard.aspx");
+        }
+
+        protected void btnAdminMedicineInventory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminMedicineInventory.aspx");
+        }
+
+        protected void btnAdminDiseaseRecord_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminDiseaseRecord.aspx");
         }
     }
 }
