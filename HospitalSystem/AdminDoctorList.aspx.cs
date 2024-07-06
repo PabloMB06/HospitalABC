@@ -1,6 +1,7 @@
-﻿using HospitalSystem.Objects;
+using HospitalSystem.Objects;
 using System;
 using System.IO;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace HospitalSystem
@@ -11,58 +12,84 @@ namespace HospitalSystem
         {
             if (!IsPostBack)
             {
-                LoadDoctorData();
+                // Verifica si se proporcionó un ID de doctor válido en la URL
+                if (!string.IsNullOrEmpty(Request.QueryString["doctorId"]))
+                {
+                    string doctorId = Request.QueryString["doctorId"];
+                    LoadDoctorData(doctorId);
+                }
+                else
+                {
+                    // Si no se proporciona un ID de doctor, redirige a AdminDashboard.aspx
+                    Response.Redirect("AdminManageDoctorDashboard.aspx");
+                }
             }
         }
 
-        private void LoadDoctorData()
+        private void LoadDoctorData(string doctorId)
         {
-            string doctorFilePath = Server.MapPath("~/DB/doctor.txt");
-
-            if (File.Exists(doctorFilePath))
+            try
             {
-                string[] lines = File.ReadAllLines(doctorFilePath);
-                foreach (string line in lines)
+                string doctorFilePath = Server.MapPath("~/DB/doctor.txt");
+
+                if (File.Exists(doctorFilePath))
                 {
-                    string[] doctorData = line.Split(';');
+                    string[] doctorData = File.ReadAllLines(doctorFilePath);
 
-                    if (doctorData.Length >= 9)
+                    foreach (string line in doctorData)
                     {
-                        Doctor doctor = new Doctor
+                        string[] doctorFields = line.Split(';');
+                        if (doctorFields.Length >= 10 && doctorFields[3] == doctorId) // assuming the NIC is the unique identifier (doctorId)
                         {
-                            Name = doctorData[0],
-                            LastName1 = doctorData[1],
-                            LastName2 = doctorData[2],
-                            NIC = doctorData[3],
-                            CivilStatus = doctorData[4],
-                            BirthDate = doctorData[5],
-                            Phone = doctorData[6],
-                            Email = doctorData[7],
-                            Specialty = doctorData[8]
-                        };
+                            Doctor doctor = new Doctor
+                            {
+                                Name = doctorFields[0],
+                                LastName1 = doctorFields[1],
+                                LastName2 = doctorFields[2],
+                                NIC = doctorFields[3],
+                                CivilStatus = doctorFields[4],
+                                BirthDate = doctorFields[5],
+                                Phone = doctorFields[6],
+                                Email = doctorFields[7],
+                                Specialty = doctorFields[8],
+                                Address = doctorFields[9]
+                            };
 
-                        Table table = new Table { CssClass = "table table-bordered mb-4" };
-
-                        AddTableRow(table, "Name", doctor.Name);
-                        AddTableRow(table, "Last Name 1", doctor.LastName1);
-                        AddTableRow(table, "Last Name 2", doctor.LastName2);
-                        AddTableRow(table, "NIC", doctor.NIC);
-                        AddTableRow(table, "Civil Status", doctor.CivilStatus);
-                        AddTableRow(table, "Birth Date", doctor.BirthDate);
-                        AddTableRow(table, "Phone", doctor.Phone);
-                        AddTableRow(table, "Email", doctor.Email);
-                        AddTableRow(table, "Specialty", doctor.Specialty);
-
-                        phDoctorTable.Controls.Add(table);
+                            CreateTable(doctor);
+                            return;
+                        }
                     }
                 }
+                else
+                {
+                    ShowErrorMessage("Doctor data file is missing.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Display error message using Bootstrap alert
-                pnlError.Visible = true;
-                lblErrorMessage.Text = "Doctor database not found. Please contact administrator.";
+                ShowErrorMessage($"An error occurred while loading doctor data: {ex.Message}");
             }
+
+            // Si no se encuentra el doctor con el ID proporcionado, muestra un mensaje de error
+            ShowErrorMessage("Doctor not found.");
+        }
+
+        private void CreateTable(Doctor doctor)
+        {
+            Table table = new Table { CssClass = "table table-bordered mb-4" };
+
+            AddTableRow(table, "Name", doctor.Name);
+            AddTableRow(table, "Last Name 1", doctor.LastName1);
+            AddTableRow(table, "Last Name 2", doctor.LastName2);
+            AddTableRow(table, "NIC", doctor.NIC);
+            AddTableRow(table, "Civil Status", doctor.CivilStatus);
+            AddTableRow(table, "Birth Date", doctor.BirthDate);
+            AddTableRow(table, "Phone", doctor.Phone);
+            AddTableRow(table, "Email", doctor.Email);
+            AddTableRow(table, "Specialty", doctor.Specialty);
+            AddTableRow(table, "Residency", doctor.Address);
+
+            phDoctorTable.Controls.Add(table);
         }
 
         private void AddTableRow(Table table, string header, string value)
@@ -74,6 +101,16 @@ namespace HospitalSystem
             row.Cells.Add(cellHeader);
             row.Cells.Add(cellValue);
             table.Rows.Add(row);
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            phDoctorTable.Controls.Add(new LiteralControl($"<p class='text-danger'>{message}</p>"));
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminManageDoctorDashboard.aspx");
         }
     }
 }
