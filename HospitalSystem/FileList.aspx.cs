@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.UI.WebControls;
@@ -113,7 +113,10 @@ namespace HospitalSystem
                 LoadPatientList();
             }
         }
-
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminManagePatientDashboard.aspx");
+        }
         private void ShowErrorMessage(string message)
         {
             // Implement your error message display logic here, e.g., using a Label or Literal control.
